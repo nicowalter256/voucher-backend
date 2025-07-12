@@ -231,6 +231,32 @@ router.post('/webhook/mtn', async (req, res) => {
 });
 
 /* -------------------------------------------------------
+   GET /payments - List all payments
+-------------------------------------------------------- */
+router.get('/', async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT * FROM payments ORDER BY created_at DESC');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching payments:', error);
+    res.status(500).json({ error: 'Failed to fetch payments' });
+  }
+});
+
+/* -------------------------------------------------------
+   GET /payments/my - List payments for the logged-in user
+-------------------------------------------------------- */
+router.get('/my', async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT * FROM payments WHERE user_id = $1 ORDER BY created_at DESC', [req.user.id]);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching user payments:', error);
+    res.status(500).json({ error: 'Failed to fetch user payments' });
+  }
+});
+
+/* -------------------------------------------------------
    Helper: poll MTN status every 10 s for 5 min
 -------------------------------------------------------- */
 async function pollPaymentStatus(paymentId, referenceId) {
