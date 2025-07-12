@@ -2,6 +2,10 @@
 
 This is a Node.js backend for an Internet Data Voucher System. It manages user authentication, voucher management, and payment processing using MTN MoMo and a PostgreSQL database (hosted on Supabase).
 
+## Hosted URL
+
+The backend is hosted at: [https://voucher-backend-1.onrender.com/](https://voucher-backend-1.onrender.com/)
+
 ## Features
 
 - User authentication
@@ -33,7 +37,7 @@ voucher-backend/
 1. **Clone the repository:**
 
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/nicowalter256/voucher-backend
    cd voucher-backend
    ```
 
