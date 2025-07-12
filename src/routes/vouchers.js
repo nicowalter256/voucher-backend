@@ -134,4 +134,15 @@ router.post('/validate', async (req, res) => {
   }
 });
 
+// GET /vouchers - List all vouchers
+router.get('/', async (req, res) => {
+  try {
+    const { rows } = await db.query('SELECT * FROM vouchers ORDER BY created_at DESC');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching vouchers:', error);
+    res.status(500).json({ error: 'Failed to fetch vouchers' });
+  }
+});
+
 export default router;
